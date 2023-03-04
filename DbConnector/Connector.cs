@@ -2,7 +2,7 @@ using System.Data;
 using Dapper;
 using MySql.Data.MySqlClient;
 
-namespace Database;
+namespace DbConnector;
 
 public class Connector : IConnector
 {

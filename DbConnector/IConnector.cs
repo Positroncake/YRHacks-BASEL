@@ -1,4 +1,4 @@
-namespace Database;
+namespace DbConnector;
 
 public interface IConnector
 {
