@@ -1271,11 +1271,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/positron/RiderProjects/YRHacks-0x07E7/Yrhacks2023/Server/Yrhacks2023.Server.csproj",
+      "projectUniqueName": "/home/positron/RiderProjects/YRHacks-0x07E7/Server/Yrhacks2023.Server.csproj",
       "projectName": "Yrhacks2023.Server",
-      "projectPath": "/home/positron/RiderProjects/YRHacks-0x07E7/Yrhacks2023/Server/Yrhacks2023.Server.csproj",
+      "projectPath": "/home/positron/RiderProjects/YRHacks-0x07E7/Server/Yrhacks2023.Server.csproj",
       "packagesPath": "/home/positron/.nuget/packages/",
-      "outputPath": "/home/positron/RiderProjects/YRHacks-0x07E7/Yrhacks2023/Server/obj/",
+      "outputPath": "/home/positron/RiderProjects/YRHacks-0x07E7/Server/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/positron/.nuget/NuGet/NuGet.Config"
@@ -1290,11 +1290,11 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "/home/positron/RiderProjects/YRHacks-0x07E7/Yrhacks2023/Client/Yrhacks2023.Client.csproj": {
-              "projectPath": "/home/positron/RiderProjects/YRHacks-0x07E7/Yrhacks2023/Client/Yrhacks2023.Client.csproj"
+            "/home/positron/RiderProjects/YRHacks-0x07E7/Client/Yrhacks2023.Client.csproj": {
+              "projectPath": "/home/positron/RiderProjects/YRHacks-0x07E7/Client/Yrhacks2023.Client.csproj"
             },
-            "/home/positron/RiderProjects/YRHacks-0x07E7/Yrhacks2023/Shared/Yrhacks2023.Shared.csproj": {
-              "projectPath": "/home/positron/RiderProjects/YRHacks-0x07E7/Yrhacks2023/Shared/Yrhacks2023.Shared.csproj"
+            "/home/positron/RiderProjects/YRHacks-0x07E7/Shared/Yrhacks2023.Shared.csproj": {
+              "projectPath": "/home/positron/RiderProjects/YRHacks-0x07E7/Shared/Yrhacks2023.Shared.csproj"
             }
           }
         }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lv8sRp7LapfKe26lPbicKwEboJrPXdMG6mLBfXhXY4BkmKUp3fWwoBJ96Pg/1LIvJPnRogjBNIRWwawWwrUEgQ==",
+  "dgSpecHash": "FXaHIDCtBmqblutFBXWpqyXqAZdsR8+QjzuSc0jxt3C1Q/eTQ71WPfg67bR3R4lBnWKFExuWtclDm4YVp/0zqA==",
   "success": true,
-  "projectFilePath": "/home/positron/RiderProjects/YRHacks-0x07E7/Yrhacks2023/Server/Yrhacks2023.Server.csproj",
+  "projectFilePath": "/home/positron/RiderProjects/YRHacks-0x07E7/Server/Yrhacks2023.Server.csproj",
   "expectedPackageFiles": [
     "/home/positron/.nuget/packages/microsoft.aspnetcore.authorization/7.0.3/microsoft.aspnetcore.authorization.7.0.3.nupkg.sha512",
     "/home/positron/.nuget/packages/microsoft.aspnetcore.components/7.0.3/microsoft.aspnetcore.components.7.0.3.nupkg.sha512",
