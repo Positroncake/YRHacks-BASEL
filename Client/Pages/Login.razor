@@ -1,0 +1,104 @@
+﻿@page "/Login"
+@page "/Register"
+@using Yrhacks2023.Shared
+@using System.Security.Cryptography
+@using System.Text
+@using Blazored.LocalStorage
+@using System.Net
+@using Microsoft.AspNetCore.WebUtilities
+@inject NavigationManager Navigation
+@inject HttpClient HttpClient
+@inject ILocalStorageService Lss
+<PageTitle>Log In/BASEL</PageTitle>
+<PageHeader/>
+
+
+<div class="page-content">
+    <div class="login-card">
+        <div class="center-login">
+            <h2 class="login-title">Hello!</h2>
+            <p> @_headerDesc <a href="@_headerLinkTarget" @onclick="UpdateHeaderDesc">@_headerLinkText</a></p>
+            <div class="login-fields">
+                <div class="login-form">
+                    <input @bind="_username" type="text" class="text-input" placeholder="Email or Username"/>
+
+                    <!-- Text input -->
+                    <input @bind="_password" type="password" class=" text-input" placeholder="Password"/>
+
+                    <input @onclick="SendLogin" type="submit" class="pass-submit">
+                    <p style="display: @(_errMsg.Length == 0 ? "none" : "block"); color: red">@_errMsg</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string _username = "";
+    private string _password = "";
+    private string _errMsg = "";
+    private string _headerDesc = "";
+    private string _headerLinkTarget = "";
+    private string _headerLinkText = "";
+
+    protected async override void OnInitialized()
+    {
+        UpdateHeaderDesc();
+        StateHasChanged();
+    }
+
+    async void UpdateHeaderDesc()
+    {
+        var uri = Navigation.ToAbsoluteUri(Navigation.Uri);
+        Console.WriteLine(uri.AbsolutePath);
+        if (uri.AbsolutePath == "/Login")
+        {
+            _headerDesc = @"Create your BASEL account.";
+            _headerLinkTarget = "/Register";
+            _headerLinkText = "Already have one?";
+        }
+        else if (uri.AbsolutePath == "/Register")
+        {
+            _headerDesc = @"Sign in to BASEL.";
+            _headerLinkTarget = "/Login";
+            _headerLinkText = "Don't have an account?";
+        }
+        StateHasChanged();
+    }
+
+    async void SendLogin()
+    {
+        var request = new LoginRequest()
+        {
+            Username = _username,
+            Password = SHA512.HashData(Encoding.UTF8.GetBytes(_password))
+        };
+
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("AccountApi/Login", request);
+        switch (response.StatusCode)
+        {
+            case HttpStatusCode.OK:
+            {
+                break;
+            }
+            case HttpStatusCode.Unauthorized or HttpStatusCode.BadRequest:
+            {
+                _errMsg = "Invalid username and/or password.";
+                StateHasChanged();
+                break;
+            }
+            default:
+            {
+                int statusCodeInt = (int) response.StatusCode;
+                if (statusCodeInt is >= 500 and < 600)
+                    _errMsg = "Server is having issues. Try again in a few seconds.";
+                else
+                    _errMsg = $"Unexpected status code: {statusCodeInt}.";
+                StateHasChanged();
+                break;
+            }
+        }
+        await Lss.SetItemAsStringAsync("token", await response.Content.ReadAsStringAsync());
+    }
+
+}
