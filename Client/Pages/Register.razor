@@ -19,16 +19,16 @@
             <h2 class="login-title">Hello!</h2>
             <p>Create your BASEL account. <a href="/Login">Already have one?</a></p>
             <div class="login-fields">
-                <div class="login-form">
+                <form class="login-form" @onsubmit="SendLogin">
                     <input @bind="_username" type="text" class="text-input" placeholder="Username"/>
                     <input @bind="_displayName" type="text" class="text-input" placeholder="Display Name"/>
                     <input @bind="_email" type="email" class="text-input" placeholder="Email"/>
                     <input @bind="_password" type="password" class=" text-input" placeholder="Password"/>
                     <input @bind="_confirmPassword" type="password" class=" text-input" placeholder="Confirm password"/>
 
-                    <input @onclick="SendLogin" value="Register" type="submit" class="pass-submit">
-                    <p style="display: @(_errMsg.Length == 0 ? "none" : "block"); color: red">@_errMsg</p>
-                </div>
+                    <input  value="Register" type="submit" class="pass-submit">
+                    <p style="display: @(_errMsg.Length == 0 ? "none" : "block"); color: @(_msgIsGreen ? "green" : "red")">@_errMsg</p>
+                </form>
             </div>
         </div>
     </div>
@@ -43,6 +43,7 @@
     private string _password = "";
     private string _confirmPassword = "";
     private string _errMsg = "";
+    private bool _msgIsGreen = false;
     
     // Thanks SO
     // https://stackoverflow.com/a/1374644/10808912
@@ -66,24 +67,28 @@
     {
         if (_password != _confirmPassword)
         {
+            _msgIsGreen = false;
             _errMsg = "Passwords do not match.";
             StateHasChanged();
             return;
         }
         if (!IsValidEmail(_email))
         {
+            _msgIsGreen = false;
             _errMsg = "Email is not valid.";
             StateHasChanged();
             return;
         }
         if (!UsernameRegex.IsMatch(_username))
         {
+            _msgIsGreen = false;
             _errMsg = "Username can only contain letters, numbers, - and _, and are capped to 64 characters.";
             StateHasChanged();
             return;
         }
         if (_displayName.Length == 0)
         {
+            _msgIsGreen = false;
             _errMsg = "Display name is required.";
             StateHasChanged();
             return;
@@ -105,12 +110,14 @@
             }
             case HttpStatusCode.Conflict or HttpStatusCode.BadRequest:
             {
+                _msgIsGreen = false;
                 _errMsg = "Username is already taken.";
                 StateHasChanged();
                 return;
             }
             default:
             {
+                _msgIsGreen = false;
                 int statusCodeInt = (int) response.StatusCode;
                 if (statusCodeInt is >= 500 and < 600)
                     _errMsg = "Server is having issues. Try again in a few seconds.";
@@ -121,6 +128,9 @@
             }
         }
         await Lss.SetItemAsStringAsync("token", await response.Content.ReadAsStringAsync());
+        _msgIsGreen = true;
+        _errMsg = "Login successful!";
+        StateHasChanged();
     }
 
 }

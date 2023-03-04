@@ -18,15 +18,15 @@
             <h2 class="login-title">Hello!</h2>
             <p>Sign into BASEL here. <a href="/Register">Need an account?</a></p>
             <div class="login-fields">
-                <div class="login-form">
+                <form class="login-form" @onsubmit="SendLogin">
                     <input @bind="_username" type="text" class="text-input" placeholder="Email or Username"/>
 
                     <!-- Text input -->
                     <input @bind="_password" type="password" class=" text-input" placeholder="Password"/>
 
-                    <input @onclick="SendLogin" value="Log in" type="submit" class="pass-submit">
-                    <p style="display: @(_errMsg.Length == 0 ? "none" : "block"); color: red">@_errMsg</p>
-                </div>
+                    <input value="Log in" type="submit" class="pass-submit">
+                    <p style="display: @(_bottomMsg.Length == 0 ? "none" : "block"); color: @(_msgIsGreen ? "green" : "red")">@_bottomMsg</p>
+                </form>
             </div>
         </div>
     </div>
@@ -35,7 +35,8 @@
 @code {
     private string _username = "";
     private string _password = "";
-    private string _errMsg = "";
+    private string _bottomMsg = "";
+    private bool _msgIsGreen = false;
 
     async void SendLogin()
     {
@@ -54,22 +55,28 @@
             }
             case HttpStatusCode.Unauthorized or HttpStatusCode.BadRequest:
             {
-                _errMsg = "Invalid username and/or password.";
+                _msgIsGreen = false;
+                _bottomMsg = "Invalid username and/or password.";
                 StateHasChanged();
                 return;
             }
             default:
             {
+                _msgIsGreen = false;
                 int statusCodeInt = (int) response.StatusCode;
                 if (statusCodeInt is >= 500 and < 600)
-                    _errMsg = "Server is having issues. Try again in a few seconds.";
+                    _bottomMsg = "Server is having issues. Try again in a few seconds.";
                 else
-                    _errMsg = $"Unexpected status code: {statusCodeInt}.";
+                    _bottomMsg = $"Unexpected status code: {statusCodeInt}.";
                 StateHasChanged();
                 return;
             }
         }
         await Lss.SetItemAsStringAsync("token", await response.Content.ReadAsStringAsync());
+
+        _msgIsGreen = true;
+        _bottomMsg = "Login successful!";
+        StateHasChanged();
     }
 
 }
