@@ -4,6 +4,7 @@
     margin: auto;
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
 }
 
 
@@ -20,11 +21,8 @@
     border-radius: 0.25rem;
 }
 
-.product-image{
-    width: 100%;
-    object-fit: contain;
-
-
+form{
+    height: 70%;
 }
 
 .product-info-section{
@@ -64,6 +62,8 @@
 }
 
 .upload-button__input {
+    cursor: pointer;
+
     /* Take the full size */
     height: 100%;
     left: 0;
@@ -76,6 +76,7 @@
 }
 
 .upload-button__icon {
+    background-image: url(upload-icon.png) no-repeat;
     margin-right: 0.5rem;
 }
 
@@ -84,3 +85,4 @@ textarea{
     height: 60%;
     resize: none;
 }
+
