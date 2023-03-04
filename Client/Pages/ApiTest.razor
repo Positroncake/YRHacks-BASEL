@@ -1,0 +1,62 @@
+@page "/ApiTest"
+@using Microsoft.AspNetCore.Components
+@using Yrhacks2023.Shared
+@using System.Security.Cryptography
+@inject HttpClient HttpClient
+
+<br/>
+<span>Select product category:</span>
+<InputSelect @bind-Value="_itemType">
+    @for (var i = 0; i <= 12; ++i)
+    {
+        <option>@((ItemType)i)</option>
+    }
+</InputSelect>
+
+<br/>
+<span>Product name:</span>
+<input @bind="_name"/>
+
+<br/>
+<span>Description:</span>
+<input @bind="_description"/>
+
+<br/>
+<button @onclick="SendToServer">Submit</button>
+
+<button @onclick="TempTest">TempTest</button>
+
+@code {
+
+    private string _name = string.Empty;
+    private ItemType _itemType;
+    private string _description = string.Empty;
+    private string _image = string.Empty;
+
+    private async void SendToServer()
+    {
+        var id = new byte[8];
+        RandomNumberGenerator.Fill(id);
+
+        var p = new Product
+        {
+            Id = BitConverter.ToInt64(id, 0),
+            Name = _name,
+            TypeId = (int) _itemType,
+            Description = _description,
+            Image = "image",
+            Seller = "seller",
+            Price = 6.9M
+        };
+
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/products/listProducts", p);
+        Console.WriteLine(response.IsSuccessStatusCode ? "200" : "ERR");
+    }
+
+    private async void TempTest()
+    {
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/products/listProducts", "aaaaaa");
+        Console.WriteLine(response.IsSuccessStatusCode ? "200" : "ERR");
+    }
+
+}

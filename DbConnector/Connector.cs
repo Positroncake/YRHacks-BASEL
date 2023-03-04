@@ -6,6 +6,8 @@ namespace DbConnector;
 
 public class Connector : IConnector
 {
+    public const string ConnStr = "Server=172.105.103.136;Port=3306;Database=Pcpp;Uid=PcppUser;Pwd=PcppPassword";
+    
     public async Task<List<T>> QueryAsync<T, TU>(string sql, TU parameters, string connectionString)
     {
         using IDbConnection connection = new MySqlConnection(connectionString);
