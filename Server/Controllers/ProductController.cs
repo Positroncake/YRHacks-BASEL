@@ -41,8 +41,9 @@ public class ProductController : ControllerBase
 
     [HttpGet]
     [Route("getAll/{i:int}")]
-    public async Task<ActionResult> GetAllById(int i)
+    public async Task<ActionResult> GetAllByType(int i)
     {
+        Console.WriteLine(i);
         IConnector connector = new Connector();
         const string query = "SELECT * FROM products WHERE TypeId = @TypeId";
         List<Product> products = await connector.QueryAsync<Product, dynamic>(query, new
@@ -52,17 +53,17 @@ public class ProductController : ControllerBase
         return products.Count == 0 ? NotFound() : Ok(products);
     }
 
-    [HttpPost]
+    [HttpPut]
     [Route("search")]
     public async Task<ActionResult> Search([FromBody] string key)
     {
         IConnector connector = new Connector();
-        const string command =
-            "SELECT * FROM products WHERE Name LIKE %@SearchKey%";
-        await connector.ExecuteAsync(command, new
+        const string query =
+            "SELECT * FROM products WHERE Name LIKE @SearchKey";
+        List<Product> products = await connector.QueryAsync<Product, dynamic>(query, new
         {
-            SearchKey = key
+            SearchKey = $"%{key}%"
         }, Connector.ConnStr);
-        return Ok();
+        return Ok(products);
     }
 }
