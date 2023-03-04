@@ -46,7 +46,7 @@
     
     // Thanks SO
     // https://stackoverflow.com/a/1374644/10808912
-    bool IsValidEmail(string email)
+    private bool IsValidEmail(string email)
     {
         var trimmedEmail = email.Trim();
 
@@ -62,7 +62,7 @@
         }
     }
 
-    async void SendLogin()
+    private async void SendLogin()
     {
         if (_password != _confirmPassword)
         {
