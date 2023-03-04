@@ -1,0 +1,86 @@
+﻿.page-content{
+    width: 70%;
+    height: 90vh;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+
+
+.upload-image-box{
+    width: 35%;
+    height: 35%;
+    display: flex;
+    /* Center the content */
+    justify-content: center;
+
+    /* Border */
+    border: 0.25rem dashed #d1d5db;
+    border-radius: 0.25rem;
+}
+
+.product-image{
+    width: 100%;
+    object-fit: contain;
+
+
+}
+
+.product-info-section{
+    padding: 2em;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-info-section > input{
+    margin: 0.5em;
+    width: 20em;
+    height: 3em;
+
+    border-radius: 2px;
+    font-family: Syne;
+    padding: 1em;
+}
+
+
+
+.upload-button {
+    /* Used to position the input */
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    /* Center the content */
+    align-items: center;
+    justify-content: center;
+    display: flex;
+
+    /* Border */
+
+    padding: 0.25rem 0.5rem;
+}
+
+.upload-button__input {
+    /* Take the full size */
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    /* Make it transparent */
+    opacity: 0;
+}
+
+.upload-button__icon {
+    margin-right: 0.5rem;
+}
+
+textarea{
+    overflow-y: scroll;
+    height: 60%;
+    resize: none;
+}
