@@ -22,7 +22,11 @@
 <input @bind="_description"/>
 
 <br/>
-<button @onclick="SendToServer">Submit</button>
+<button @onclick="SendToServer">Add</button>
+
+<button @onclick="GetAll">Get all</button>
+
+<button @onclick="GetAllOfType">Get all of type</button>
 
 @code {
 
@@ -47,7 +51,19 @@
             Price = 6.9M
         };
 
-        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/products/listProducts", p);
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/products/addProduct", p);
+        Console.WriteLine(response.IsSuccessStatusCode ? "200" : "ERR");
+    }
+
+    private async void GetAll()
+    {
+        HttpResponseMessage response = await HttpClient.GetAsync("api/products/getAll");
+        Console.WriteLine(response.IsSuccessStatusCode ? "200" : "ERR");
+    }
+    
+    private async void GetAllOfType()
+    {
+        HttpResponseMessage response = await HttpClient.GetAsync($"api/products/getAll/{(int)_itemType}");
         Console.WriteLine(response.IsSuccessStatusCode ? "200" : "ERR");
     }
 

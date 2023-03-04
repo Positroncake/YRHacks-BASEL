@@ -1,5 +1,4 @@
 using DbConnector;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Yrhacks2023.Shared;
 
@@ -10,8 +9,8 @@ namespace Yrhacks2023.Server.Controllers;
 public class ProductController : ControllerBase
 {
     [HttpPost]
-    [Route("listProducts")]
-    public async Task<ActionResult> ListProduct([FromBody] Product product)
+    [Route("addProduct")]
+    public async Task<ActionResult> AddProduct([FromBody] Product product)
     {
         IConnector connector = new Connector();
         const string command =
@@ -27,5 +26,28 @@ public class ProductController : ControllerBase
             product.Price
         }, Connector.ConnStr);
         return Ok();
+    }
+
+    [HttpGet]
+    [Route("getAll")]
+    public async Task<ActionResult> GetAll()
+    {
+        IConnector connector = new Connector();
+        const string query = "SELECT * FROM products";
+        List<Product> products = await connector.QueryAsync<Product, dynamic>(query, new { }, Connector.ConnStr);
+        return products.Count == 0 ? NotFound() : Ok(products);
+    }
+
+    [HttpGet]
+    [Route("getAll/{i:int}")]
+    public async Task<ActionResult> GetAllById(int i)
+    {
+        IConnector connector = new Connector();
+        const string query = "SELECT * FROM products WHERE TypeId = @TypeId";
+        List<Product> products = await connector.QueryAsync<Product, dynamic>(query, new
+        {
+            TypeId = i
+        }, Connector.ConnStr);
+        return products.Count == 0 ? NotFound() : Ok(products);
     }
 }
