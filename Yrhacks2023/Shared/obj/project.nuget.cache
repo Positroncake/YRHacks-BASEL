@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "B8qmA6kaeDqPvHQSUBGs9j68S8BaW5NxpIQ90VItE0ohZuL09YQuXEZCuxVrgVEG558p7d1Z7bv/YAR03osoGQ==",
+  "success": true,
+  "projectFilePath": "/home/positron/RiderProjects/YRHacks-0x07E7/Yrhacks2023/Shared/Yrhacks2023.Shared.csproj",
+  "expectedPackageFiles": [
+    "/home/positron/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.3/microsoft.aspnetcore.app.ref.7.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
