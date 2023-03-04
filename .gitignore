@@ -1,2 +1,8 @@
-/*/obj/
-/*/bin/
+Client/bin
+Client/obj
+Server/bin
+Server/obj
+Shared/bin
+Shared/obj
+DbConnector/bin
+DbConnector/obj

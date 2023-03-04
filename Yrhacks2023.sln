@@ -8,6 +8,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yrhacks2023.Client", "Clien
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yrhacks2023.Shared", "Shared\Yrhacks2023.Shared.csproj", "{F120A030-2C96-42A3-9171-71AB7C346BFE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbConnector", "DbConnector\DbConnector.csproj", "{8D62985D-FCC8-4F4B-B72F-7E71AE1A4C01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +56,18 @@ Global
 		{F120A030-2C96-42A3-9171-71AB7C346BFE}.Release|x64.Build.0 = Release|Any CPU
 		{F120A030-2C96-42A3-9171-71AB7C346BFE}.Release|x86.ActiveCfg = Release|Any CPU
 		{F120A030-2C96-42A3-9171-71AB7C346BFE}.Release|x86.Build.0 = Release|Any CPU
+		{8D62985D-FCC8-4F4B-B72F-7E71AE1A4C01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D62985D-FCC8-4F4B-B72F-7E71AE1A4C01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D62985D-FCC8-4F4B-B72F-7E71AE1A4C01}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8D62985D-FCC8-4F4B-B72F-7E71AE1A4C01}.Debug|x64.Build.0 = Debug|Any CPU
+		{8D62985D-FCC8-4F4B-B72F-7E71AE1A4C01}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8D62985D-FCC8-4F4B-B72F-7E71AE1A4C01}.Debug|x86.Build.0 = Debug|Any CPU
+		{8D62985D-FCC8-4F4B-B72F-7E71AE1A4C01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D62985D-FCC8-4F4B-B72F-7E71AE1A4C01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D62985D-FCC8-4F4B-B72F-7E71AE1A4C01}.Release|x64.ActiveCfg = Release|Any CPU
+		{8D62985D-FCC8-4F4B-B72F-7E71AE1A4C01}.Release|x64.Build.0 = Release|Any CPU
+		{8D62985D-FCC8-4F4B-B72F-7E71AE1A4C01}.Release|x86.ActiveCfg = Release|Any CPU
+		{8D62985D-FCC8-4F4B-B72F-7E71AE1A4C01}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

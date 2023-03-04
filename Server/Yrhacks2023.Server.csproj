@@ -12,11 +12,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Client\Yrhacks2023.Client.csproj" />
+    <ProjectReference Include="..\DbConnector\DbConnector.csproj" />
     <ProjectReference Include="..\Shared\Yrhacks2023.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controllers" />
   </ItemGroup>
 
 
