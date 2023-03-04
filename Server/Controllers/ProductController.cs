@@ -83,6 +83,8 @@ public class ProductController : ControllerBase
 
         if (!await reader.ReadAsync())
             return NotFound();
+        if (reader.IsDBNull(0))
+            return NotFound();
 
         int len = (int) reader.GetBytes(0, 0, null, 0, 0);
         byte[] data = new byte[len];
