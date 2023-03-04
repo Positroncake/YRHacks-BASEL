@@ -15,5 +15,9 @@
     <ProjectReference Include="..\Shared\Yrhacks2023.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers" />
+  </ItemGroup>
+
 
 </Project>
