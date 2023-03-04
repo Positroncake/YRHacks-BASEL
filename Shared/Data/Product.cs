@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
-namespace Yrhacks2023.Shared;
+namespace Yrhacks2023.Shared.Data;
 
 public class Product
 {

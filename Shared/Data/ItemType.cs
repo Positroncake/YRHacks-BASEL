@@ -1,4 +1,4 @@
-namespace Yrhacks2023.Shared;
+namespace Yrhacks2023.Shared.Data;
 
 public enum ItemType
 {

@@ -2,6 +2,7 @@ using DbConnector;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Yrhacks2023.Shared;
+using Yrhacks2023.Shared.Data;
 
 namespace Yrhacks2023.Server.Controllers;
 
