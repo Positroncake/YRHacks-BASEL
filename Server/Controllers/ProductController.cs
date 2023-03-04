@@ -1,4 +1,5 @@
 using DbConnector;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Yrhacks2023.Shared;
 
@@ -49,5 +50,19 @@ public class ProductController : ControllerBase
             TypeId = i
         }, Connector.ConnStr);
         return products.Count == 0 ? NotFound() : Ok(products);
+    }
+
+    [HttpPost]
+    [Route("search")]
+    public async Task<ActionResult> Search([FromBody] string key)
+    {
+        IConnector connector = new Connector();
+        const string command =
+            "SELECT * FROM products WHERE Name LIKE %@SearchKey%";
+        await connector.ExecuteAsync(command, new
+        {
+            SearchKey = key
+        }, Connector.ConnStr);
+        return Ok();
     }
 }
