@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/positron/RiderProjects/YRHacks-0x07E7/Shared/Yrhacks2023.Shared.csproj": {}
+    "/home/jgcodes/Documents/Code/C#/YRHacks-0x07E7/Shared/Yrhacks2023.Shared.csproj": {}
   },
   "projects": {
-    "/home/positron/RiderProjects/YRHacks-0x07E7/Shared/Yrhacks2023.Shared.csproj": {
+    "/home/jgcodes/Documents/Code/C#/YRHacks-0x07E7/Shared/Yrhacks2023.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/positron/RiderProjects/YRHacks-0x07E7/Shared/Yrhacks2023.Shared.csproj",
+        "projectUniqueName": "/home/jgcodes/Documents/Code/C#/YRHacks-0x07E7/Shared/Yrhacks2023.Shared.csproj",
         "projectName": "Yrhacks2023.Shared",
-        "projectPath": "/home/positron/RiderProjects/YRHacks-0x07E7/Shared/Yrhacks2023.Shared.csproj",
-        "packagesPath": "/home/positron/.nuget/packages/",
-        "outputPath": "/home/positron/RiderProjects/YRHacks-0x07E7/Shared/obj/",
+        "projectPath": "/home/jgcodes/Documents/Code/C#/YRHacks-0x07E7/Shared/Yrhacks2023.Shared.csproj",
+        "packagesPath": "/home/jgcodes/.nuget/packages/",
+        "outputPath": "/home/jgcodes/Documents/Code/C#/YRHacks-0x07E7/Shared/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/positron/.nuget/NuGet/NuGet.Config"
+          "/home/jgcodes/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
