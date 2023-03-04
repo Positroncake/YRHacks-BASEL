@@ -1,0 +1,18 @@
+<div class="item-card shadow" id="CPU" onclick="">
+    <h3 class="item-type">CPU</h3>
+    <hr>
+    <div class="item-details">
+        <img class="item-image" id="" src="computer-sample.jpeg">
+        <p>@Description</p>
+        <p class="item-price">@($"{Price:2F}")</p>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string ItemType { get; set; }
+    [Parameter]
+    public string Description { get; set; }
+    [Parameter]
+    public decimal Price { get; set; }
+}
