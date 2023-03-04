@@ -14,5 +14,6 @@ public enum ItemType
     Keyboard = 9,
     Monitor = 10,
     Cooler = 11,
-    CaseFan = 12
+    CaseFan = 12,
+    Phone = 13
 }
