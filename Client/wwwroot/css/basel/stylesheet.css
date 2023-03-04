@@ -70,7 +70,7 @@ header{
   height: 3em;
   border-radius: 2px;
   border: 0;
-  font-family: Syne;
+  font-family: Syne, 'Helvetica Neue', Helvetica, Arial, sans-serif;
   padding: 1em;
 }
 
