@@ -26,7 +26,7 @@ public enum ItemType
     Monitor = 10,
     [UserString("Cooler")]
     Cooler = 11,
-    [UserString("CaseFan")]
+    [UserString("Case Fan")]
     CaseFan = 12,
     [UserString("Phone")]
     Phone = 13
