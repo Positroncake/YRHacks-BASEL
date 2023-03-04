@@ -1,0 +1,126 @@
+﻿@page "/Register"
+@using Yrhacks2023.Shared
+@using System.Security.Cryptography
+@using System.Text
+@using Blazored.LocalStorage
+@using System.Net
+@using System.Text.RegularExpressions
+@using Microsoft.AspNetCore.WebUtilities
+@inject NavigationManager Navigation
+@inject HttpClient HttpClient
+@inject ILocalStorageService Lss
+<PageTitle>Log In/BASEL</PageTitle>
+<PageHeader/>
+
+
+<div class="page-content">
+    <div class="login-card">
+        <div class="center-login">
+            <h2 class="login-title">Hello!</h2>
+            <p>Create your BASEL account. <a href="/Login">Already have one?</a></p>
+            <div class="login-fields">
+                <div class="login-form">
+                    <input @bind="_username" type="text" class="text-input" placeholder="Username"/>
+                    <input @bind="_displayName" type="text" class="text-input" placeholder="Display Name"/>
+                    <input @bind="_email" type="email" class="text-input" placeholder="Email"/>
+                    <input @bind="_password" type="password" class=" text-input" placeholder="Password"/>
+                    <input @bind="_confirmPassword" type="password" class=" text-input" placeholder="Confirm password"/>
+
+                    <input @onclick="SendLogin" type="submit" class="pass-submit">
+                    <p style="display: @(_errMsg.Length == 0 ? "none" : "block"); color: red">@_errMsg</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private static readonly Regex UsernameRegex = new(@"^[A-Za-z0-9_\-]{1,64}$");
+    
+    private string _username = "";
+    private string _displayName = "";
+    private string _email = "";
+    private string _password = "";
+    private string _confirmPassword = "";
+    private string _errMsg = "";
+    
+    // Thanks SO
+    // https://stackoverflow.com/a/1374644/10808912
+    bool IsValidEmail(string email)
+    {
+        var trimmedEmail = email.Trim();
+
+        if (trimmedEmail.EndsWith(".")) {
+            return false; // suggested by @TK-421
+        }
+        try {
+            var addr = new System.Net.Mail.MailAddress(email);
+            return addr.Address == trimmedEmail;
+        }
+        catch {
+            return false;
+        }
+    }
+
+    async void SendLogin()
+    {
+        if (_password != _confirmPassword)
+        {
+            _errMsg = "Passwords do not match.";
+            StateHasChanged();
+            return;
+        }
+        if (!IsValidEmail(_email))
+        {
+            _errMsg = "Email is not valid.";
+            StateHasChanged();
+            return;
+        }
+        if (!UsernameRegex.IsMatch(_username))
+        {
+            _errMsg = "Username can only contain letters, numbers, - and _, and are capped to 64 characters.";
+            StateHasChanged();
+            return;
+        }
+        if (_displayName.Length == 0)
+        {
+            _errMsg = "Display name is required.";
+            StateHasChanged();
+            return;
+        }
+
+        var account = new Account
+        {
+            Username = _username,
+            PasswordHash = SHA512.HashData(Encoding.UTF32.GetBytes(_password)),
+            DisplayName = _displayName,
+            Email = _email
+        };
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("AccountApi/Register", account);
+        switch (response.StatusCode)
+        {
+            case HttpStatusCode.OK:
+            {
+                break;
+            }
+            case HttpStatusCode.Conflict or HttpStatusCode.BadRequest:
+            {
+                _errMsg = "Username is already taken.";
+                StateHasChanged();
+                return;
+            }
+            default:
+            {
+                int statusCodeInt = (int) response.StatusCode;
+                if (statusCodeInt is >= 500 and < 600)
+                    _errMsg = "Server is having issues. Try again in a few seconds.";
+                else
+                    _errMsg = $"Unexpected status code: {statusCodeInt}.";
+                StateHasChanged();
+                return;
+            }
+        }
+        await Lss.SetItemAsStringAsync("token", await response.Content.ReadAsStringAsync());
+    }
+
+}

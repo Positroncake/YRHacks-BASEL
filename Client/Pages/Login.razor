@@ -1,5 +1,4 @@
 ﻿@page "/Login"
-@page "/Register"
 @using Yrhacks2023.Shared
 @using System.Security.Cryptography
 @using System.Text
@@ -17,7 +16,7 @@
     <div class="login-card">
         <div class="center-login">
             <h2 class="login-title">Hello!</h2>
-            <p> @_headerDesc <a href="@_headerLinkTarget" @onclick="UpdateHeaderDesc">@_headerLinkText</a></p>
+            <p>Sign into BASEL here. <a href="/Login">Need an account?</a></p>
             <div class="login-fields">
                 <div class="login-form">
                     <input @bind="_username" type="text" class="text-input" placeholder="Email or Username"/>
@@ -37,34 +36,6 @@
     private string _username = "";
     private string _password = "";
     private string _errMsg = "";
-    private string _headerDesc = "";
-    private string _headerLinkTarget = "";
-    private string _headerLinkText = "";
-
-    protected async override void OnInitialized()
-    {
-        UpdateHeaderDesc();
-        StateHasChanged();
-    }
-
-    async void UpdateHeaderDesc()
-    {
-        var uri = Navigation.ToAbsoluteUri(Navigation.Uri);
-        Console.WriteLine(uri.AbsolutePath);
-        if (uri.AbsolutePath == "/Login")
-        {
-            _headerDesc = @"Create your BASEL account.";
-            _headerLinkTarget = "/Register";
-            _headerLinkText = "Already have one?";
-        }
-        else if (uri.AbsolutePath == "/Register")
-        {
-            _headerDesc = @"Sign in to BASEL.";
-            _headerLinkTarget = "/Login";
-            _headerLinkText = "Don't have an account?";
-        }
-        StateHasChanged();
-    }
 
     async void SendLogin()
     {
@@ -85,7 +56,7 @@
             {
                 _errMsg = "Invalid username and/or password.";
                 StateHasChanged();
-                break;
+                return;
             }
             default:
             {
@@ -95,7 +66,7 @@
                 else
                     _errMsg = $"Unexpected status code: {statusCodeInt}.";
                 StateHasChanged();
-                break;
+                return;
             }
         }
         await Lss.SetItemAsStringAsync("token", await response.Content.ReadAsStringAsync());
