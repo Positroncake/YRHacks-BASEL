@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Components
 @using Yrhacks2023.Shared
 @using System.Security.Cryptography
+@using System.Text
 @using Yrhacks2023.Shared.Data
 @inject HttpClient HttpClient
 
@@ -41,6 +42,13 @@
 <input @bind="_searchKey"/>
 <button @onclick="SearchByName">Search by name</button>
 
+<br/><br/><br/><br/>
+<input @bind="_username"/>
+<input @bind="_password"/>
+<input @bind="_displayName"/>
+<input @bind="_email"/>
+<button @onclick="Register">Register</button>
+
 @code {
 
     private string _name = string.Empty;
@@ -50,20 +58,21 @@
     private string _image = string.Empty;
     private string _searchKey = string.Empty;
 
+    private string _username = string.Empty;
+    private string _password = string.Empty;
+    private string _displayName = string.Empty;
+    private string _email = string.Empty;
+
     private async void SendToServer()
     {
-        var id = new byte[8];
-        RandomNumberGenerator.Fill(id);
-
         var p = new Product
         {
-            Id = BitConverter.ToUInt64(id, 0),
             Name = _name,
             Type = _itemType,
             Description = _description,
             Image = "image",
             Seller = "seller",
-            Price = 6.9M
+            Price = 690,
         };
 
         HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/products/addProduct", p);
@@ -86,6 +95,19 @@
     {
         HttpResponseMessage response = await HttpClient.PutAsJsonAsync("api/products/search", _searchKey);
         Console.WriteLine(response.IsSuccessStatusCode ? "200" : "ERR");
+    }
+
+    private async void Register()
+    {
+        var account = new Account
+        {
+            Username = _username,
+            PasswordHash = SHA512.HashData(Encoding.UTF32.GetBytes(_password)),
+            DisplayName = _displayName,
+            Email = _email
+        };
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("AccountApi/Register", account);
+        Console.WriteLine(response.Content.ReadAsStringAsync());
     }
 
 }

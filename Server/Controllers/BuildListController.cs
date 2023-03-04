@@ -1,6 +1,5 @@
 using DbConnector;
 using Microsoft.AspNetCore.Mvc;
-using Yrhacks2023.Shared;
 using Yrhacks2023.Shared.Data;
 using Yrhacks2023.Shared.Requests;
 
@@ -17,7 +16,7 @@ public class BuildListController : ControllerBase
         const string buildListQuery =
             "SELECT * FROM buildLists WHERE ListId=@ListId";
         IConnector connector = new Connector();
-        var result = await connector.QueryAsync<BuildListEntry, dynamic>(buildListQuery, new
+        List<BuildListEntry> result = await connector.QueryAsync<BuildListEntry, dynamic>(buildListQuery, new
         {
             ListId = listId
         }, Connector.ConnStr);

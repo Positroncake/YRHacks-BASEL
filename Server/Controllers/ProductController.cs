@@ -1,7 +1,6 @@
+using System.Security.Cryptography;
 using DbConnector;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using Yrhacks2023.Shared;
 using Yrhacks2023.Shared.Data;
 
 namespace Yrhacks2023.Server.Controllers;
@@ -14,18 +13,25 @@ public class ProductController : ControllerBase
     [Route("addProduct")]
     public async Task<ActionResult> AddProduct([FromBody] Product product)
     {
+        var idArr = new byte[8];
+        RandomNumberGenerator.Fill(idArr);
+        var id = BitConverter.ToUInt64(idArr, 0);
+
         IConnector connector = new Connector();
         const string command =
-            "INSERT INTO products (Id, Name, TypeId, Description, Image, Seller, Price) VALUES (@Id, @Name, @TypeId, @Description, @Image, @Seller, @Price)";
+            "INSERT INTO products (Id, Name, TypeId, Description, Image, Seller, Price, Created, Modified)" +
+            "VALUES (@Id, @Name, @TypeId, @Description, @Image, @Seller, @Price, @Created, @Modified)";
         await connector.ExecuteAsync(command, new
         {
-            product.Id,
+            Id = id,
             product.Name,
             product.TypeId,
             product.Description,
             product.Image,
             product.Seller,
-            product.Price
+            product.Price,
+            Created = DateTime.UtcNow,
+            Modified = DateTime.UtcNow
         }, Connector.ConnStr);
         return Ok();
     }
