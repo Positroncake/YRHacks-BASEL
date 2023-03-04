@@ -11,7 +11,7 @@ public class Product
     public string Description { get; set; } = string.Empty;
     public string Seller { get; set; } = string.Empty;
     public decimal Price { get; set; }
-    public int Condition { get; set; }
+    public int ConditionId { get; set; }
     
     [NotMapped]
     [JsonIgnore]
@@ -19,5 +19,13 @@ public class Product
     {
         get => (ItemType) TypeId;
         set => TypeId = (int) value;
+    }
+
+    [NotMapped]
+    [JsonIgnore]
+    public ItemCondition Condition
+    {
+        get => (ItemCondition) ConditionId;
+        set => ConditionId = (int) value;
     }
 }

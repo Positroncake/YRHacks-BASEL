@@ -19,7 +19,7 @@
         <!--I guess add IDs to these and then the associated info-->
         @foreach (var p in _products)
         {
-            <PartListCard ItemType="@(p.Type)" Description="@(p.Description)" Price="@(p.Price)"/>
+            <PartListCard ItemType="@(p.Type.ToUserString())" Description="@(p.Description)" Price="@(p.Price)"/>
         }
     </div>
 </div>
@@ -27,12 +27,13 @@
 
 @code {
     [Parameter]
-    public ulong listId { get; set; }
+    public string listId { get; set; }
 
     List<Product> _products;
 
     protected async override Task OnInitializedAsync()
     {
+        await Task.Delay(1000);
         HttpResponseMessage msg = await HttpClient.GetAsync($"/api/buildList/getId/{listId}");
         BuildList? product = await msg.Content.ReadFromJsonAsync<BuildList>();
 

@@ -18,7 +18,7 @@
             <br>
             <p class="product-price">@($"{_price:F2}")</p>
             <p class="product-type">@(_type.ToUserString())</p>
-            <p class="product-condition new">New</p>
+            <p class="product-condition">New</p>
             <br>
             <p class="product-description">@_description</p>
 
@@ -43,8 +43,14 @@
         HttpResponseMessage msg = await HttpClient.GetAsync($"/api/product/getId/{productId}");
         Product? product = await msg.Content.ReadFromJsonAsync<Product>();
         if (product == null)
-            
-        // update fields
+        {
+            _name = "Unknown";
+            _price = 0.00M;
+            _seller = "Unknown";
+            _type = ItemType.Cpu;
+            _description = "Unknown";
+        }
+    // update fields
         _name = product.Name;
         _price = product.Price;
         _seller = product.Seller;
