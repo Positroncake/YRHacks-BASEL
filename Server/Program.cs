@@ -28,6 +28,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// Testing 
+
 
 app.MapRazorPages();
 app.MapControllers();
