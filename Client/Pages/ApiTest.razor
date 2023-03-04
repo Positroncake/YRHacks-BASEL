@@ -24,16 +24,30 @@
 <br/>
 <button @onclick="SendToServer">Add</button>
 
+<br/>
 <button @onclick="GetAll">Get all</button>
 
+<br/>
+<InputSelect @bind-Value="_getType">
+    @for (var i = 0; i <= 12; ++i)
+    {
+        <option>@((ItemType)i)</option>
+    }
+</InputSelect>
 <button @onclick="GetAllOfType">Get all of type</button>
+
+<br/>
+<input @bind="_searchKey"/>
+<button @onclick="SearchByName">Search by name</button>
 
 @code {
 
     private string _name = string.Empty;
     private ItemType _itemType;
+    private ItemType _getType;
     private string _description = string.Empty;
     private string _image = string.Empty;
+    private string _searchKey = string.Empty;
 
     private async void SendToServer()
     {
@@ -63,7 +77,13 @@
     
     private async void GetAllOfType()
     {
-        HttpResponseMessage response = await HttpClient.GetAsync($"api/products/getAll/{(int)_itemType}");
+        HttpResponseMessage response = await HttpClient.GetAsync($"api/products/getAll/{(int)_getType}");
+        Console.WriteLine(response.IsSuccessStatusCode ? "200" : "ERR");
+    }
+    
+    private async void SearchByName()
+    {
+        HttpResponseMessage response = await HttpClient.PutAsJsonAsync("api/products/search", _searchKey);
         Console.WriteLine(response.IsSuccessStatusCode ? "200" : "ERR");
     }
 
