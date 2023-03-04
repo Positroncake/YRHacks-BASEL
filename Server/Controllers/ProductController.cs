@@ -40,7 +40,7 @@ public class ProductController : ControllerBase
     public async Task<ActionResult> GetAll()
     {
         IConnector connector = new Connector();
-        const string query = "SELECT (Id, Name, TypeId, Description, Seller, Price) FROM products";
+        const string query = "SELECT Id,Name,TypeId,Description,Seller,Price FROM products";
         List<Product> products = await connector.QueryAsync<Product, dynamic>(query, new { }, Connector.ConnStr);
         return products.Count == 0 ? NotFound() : Ok(products);
     }
@@ -51,7 +51,7 @@ public class ProductController : ControllerBase
     {
         Console.WriteLine(i);
         IConnector connector = new Connector();
-        const string query = "SELECT (Id, Name, TypeId, Description, Seller, Price) FROM products WHERE TypeId = @TypeId";
+        const string query = "SELECT Id,Name,TypeId,Description,Seller,Price FROM products WHERE TypeId = @TypeId";
         List<Product> products = await connector.QueryAsync<Product, dynamic>(query, new
         {
             TypeId = i
@@ -65,7 +65,7 @@ public class ProductController : ControllerBase
     {
         IConnector connector = new Connector();
         const string query =
-            "SELECT (Id, Name, TypeId, Description, Seller, Price) FROM products WHERE Name LIKE @SearchKey";
+            "SELECT Id,Name,TypeId,Description,Seller,Price FROM products WHERE Name LIKE @SearchKey";
         List<Product> products = await connector.QueryAsync<Product, dynamic>(query, new
         {
             SearchKey = $"%{key}%"
