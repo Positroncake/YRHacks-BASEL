@@ -1,0 +1,82 @@
+﻿body{
+    font-family: Syne sans-serif;
+}
+
+.page-content{
+    width: 70%;
+    height: 90vh;
+    margin: auto;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+}
+
+.product-details{
+    display: flex;
+    height: 50%;
+    padding: 1.5em;
+
+}
+
+
+.product-image-section{
+    width: 35%;
+    display: flex;
+    align-content: center;
+}
+
+.product-image{
+    width: 100%;
+    object-fit: contain;
+
+}
+
+.product-info-section{
+    padding: 2em;
+    width: 65%;
+    height:fit-content;
+}
+
+.product-name{
+    font-size: 3em;
+}
+
+.seller-username{
+
+    font-weight: 500;
+    color: var(--light-teal);
+}
+
+.product-price{
+    font-weight: 500;
+    font-size: 2em;
+}
+
+.product-type{
+    color: rgb(110,110,100);
+    font-size: 1.2em;
+}
+
+.new{
+    color: rgb(40, 160, 40);
+}
+
+.used{
+    color: var(--purple-col);
+}
+
+.small-gap{
+    height: 2em;
+}
+
+.list-button{
+    cursor: pointer;
+    font-family: Syne;
+    font-size: 1em;
+    color: white;
+    background-color: var(--dark-blue);
+    border: none;
+    border-radius: 10px;
+    width: 30%;
+    padding: 1em;
+}
