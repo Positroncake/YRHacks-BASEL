@@ -67,9 +67,23 @@
 <button @onclick="AppendToList">Append to list</button>
 
 <br/>
-<input @bind="_productId"/>
-<input @bind="_listId"/>
+<input @bind="_productId2"/>
+<input @bind="_listId2"/>
 <button @onclick="RemoveFromList">Remove from list</button>
+
+<br/>
+<input @bind="_searchListName"/>
+<button @onclick="SearchListName">Search</button>
+
+<br/>
+<button @onclick="GetAllLists">Get all lists</button>
+
+<br/>
+<button @onclick="GetAllPrivate">Get all private lists</button>
+
+<br/>
+<input @bind="_listUsername"/>
+<button @onclick="GetAllPublic">Get all public lists</button>
 
 
 @code {
@@ -92,6 +106,11 @@
     private string _listName = string.Empty;
     private string _listId = string.Empty;
     private string _productId = string.Empty;
+    private string _listId2 = string.Empty;
+    private string _productId2 = string.Empty;
+
+    private string _searchListName = string.Empty;
+    private string _listUsername = string.Empty;
 
     private async void SendToServer()
     {
@@ -184,6 +203,31 @@
             ProductId = ulong.Parse(_productId)
         };
         HttpResponseMessage response = await HttpClient.PutAsJsonAsync("api/buildList/remove", mod);
+        Console.WriteLine(response.IsSuccessStatusCode ? "200" : "ERR");
+    }
+
+    private async void SearchListName()
+    {
+        HttpResponseMessage response = await HttpClient.PutAsJsonAsync("api/buildList/searchPublic", _searchListName);
+        Console.WriteLine(response.IsSuccessStatusCode ? "200" : "ERR");
+    }
+
+    private async void GetAllLists()
+    {
+        HttpResponseMessage response = await HttpClient.GetAsync("api/buildList/getAll");
+        Console.WriteLine(response.IsSuccessStatusCode ? "200" : "ERR");
+    }
+
+    private async void GetAllPrivate()
+    {
+        string token = await Lss.ContainKeyAsync("token") ? await Lss.GetItemAsStringAsync("token") : "";
+        HttpResponseMessage response = await HttpClient.PutAsJsonAsync("api/buildList/getAllPrivate", token);
+        Console.WriteLine(response.IsSuccessStatusCode ? "200" : "ERR");
+    }
+    
+    private async void GetAllPublic()
+    {
+        HttpResponseMessage response = await HttpClient.PutAsJsonAsync("api/buildList/getAllPublicFromUser", _listUsername);
         Console.WriteLine(response.IsSuccessStatusCode ? "200" : "ERR");
     }
 

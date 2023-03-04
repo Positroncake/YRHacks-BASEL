@@ -159,15 +159,15 @@ public class BuildListController : ControllerBase
     }
     
     [HttpPut]
-    [Route("getAllPublic")]
+    [Route("getAllPublicFromUser")]
     public async Task<ActionResult> GetAllPublic([FromBody] string username)
     {
         const string query =
-            "SELECT * FROM buildLists WHERE OwnerAccount = @OwnerAccount AND IsPublic = TRUE";
+            "SELECT * FROM buildLists WHERE OwnerAccount LIKE @OwnerAccount AND IsPublic = TRUE";
         IConnector connector = new Connector();
         List<BuildList> lists = await connector.QueryAsync<BuildList, dynamic>(query, new
         {
-            OwnerAccount = username
+            OwnerAccount = $"%{username}%"
         }, Connector.ConnStr);
         return Ok(lists);
     }
