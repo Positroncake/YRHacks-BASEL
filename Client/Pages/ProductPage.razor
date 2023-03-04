@@ -40,7 +40,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        HttpResponseMessage msg = await HttpClient.GetAsync($"/api/buildList/getId/{productId}");
+        HttpResponseMessage msg = await HttpClient.GetAsync($"/api/product/getId/{productId}");
         Product? product = await msg.Content.ReadFromJsonAsync<Product>();
         if (product == null)
             
