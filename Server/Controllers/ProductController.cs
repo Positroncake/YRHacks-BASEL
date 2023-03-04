@@ -28,11 +28,4 @@ public class ProductController : ControllerBase
         }, Connector.ConnStr);
         return Ok();
     }
-
-    [HttpPost]
-    [Route("Test")]
-    public async Task<ActionResult> ListProduct([FromBody] string a)
-    {
-        return Ok(a);
-    }
 }
