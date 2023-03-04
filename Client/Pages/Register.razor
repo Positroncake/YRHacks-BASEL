@@ -26,7 +26,7 @@
                     <input @bind="_password" type="password" class=" text-input" placeholder="Password"/>
                     <input @bind="_confirmPassword" type="password" class=" text-input" placeholder="Confirm password"/>
 
-                    <input @onclick="SendLogin" type="submit" class="pass-submit">
+                    <input @onclick="SendLogin" value="Register" type="submit" class="pass-submit">
                     <p style="display: @(_errMsg.Length == 0 ? "none" : "block"); color: red">@_errMsg</p>
                 </div>
             </div>

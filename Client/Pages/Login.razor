@@ -16,7 +16,7 @@
     <div class="login-card">
         <div class="center-login">
             <h2 class="login-title">Hello!</h2>
-            <p>Sign into BASEL here. <a href="/Login">Need an account?</a></p>
+            <p>Sign into BASEL here. <a href="/Register">Need an account?</a></p>
             <div class="login-fields">
                 <div class="login-form">
                     <input @bind="_username" type="text" class="text-input" placeholder="Email or Username"/>
@@ -24,7 +24,7 @@
                     <!-- Text input -->
                     <input @bind="_password" type="password" class=" text-input" placeholder="Password"/>
 
-                    <input @onclick="SendLogin" type="submit" class="pass-submit">
+                    <input @onclick="SendLogin" value="Log in" type="submit" class="pass-submit">
                     <p style="display: @(_errMsg.Length == 0 ? "none" : "block"); color: red">@_errMsg</p>
                 </div>
             </div>

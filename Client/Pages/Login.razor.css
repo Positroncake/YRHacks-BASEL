@@ -52,4 +52,5 @@
     background-color: rgb(66, 69, 157);
     border-radius: 6px;
     width: fit-content;
+    min-width: 9rem;
 }

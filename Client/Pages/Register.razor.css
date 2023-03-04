@@ -20,11 +20,11 @@
     justify-content: center;
 }
 
-.center-login > p{
+.center-login > p {
     margin-bottom: 1em;
 }
 
-.login-title{
+.login-title {
     font-size: 3em;
 }
 
@@ -52,4 +52,5 @@
     background-color: rgb(66, 69, 157);
     border-radius: 6px;
     width: fit-content;
+    min-width: 9rem;
 }
