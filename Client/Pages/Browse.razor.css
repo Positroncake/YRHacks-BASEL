@@ -55,7 +55,7 @@
 }
 
 .sidebar-heading{
-    font-weight: 700;
+    font-weight: 500;
     margin: 1em 0 0.5em 0;
 }
 
@@ -101,7 +101,7 @@
 
 
 .item-desc{
-    font-weight:bolder;
+    font-weight: 500;
     font-size: 1.5em;
 }
 
@@ -120,7 +120,7 @@
 }
 
 .item-condition{
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .new{

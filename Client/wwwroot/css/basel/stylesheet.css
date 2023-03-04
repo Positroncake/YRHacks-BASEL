@@ -79,7 +79,7 @@ header{
 
 [type="submit"]{
   border: none;
-  border-radius: 2px;
+  border-radius: 10px;
   background-color: var(--light-blue);
   height: 3em;
   color: white;
