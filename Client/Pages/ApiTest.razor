@@ -121,6 +121,7 @@
             Description = _description,
             Seller = "seller",
             Price = 690,
+            Condition = 1
         };
 
         HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/products/addProduct", p);

@@ -19,8 +19,8 @@ public class ProductController : ControllerBase
 
         IConnector connector = new Connector();
         const string command =
-            "INSERT INTO products (Id, Name, TypeId, Description, Seller, Price, Created, Modified)" +
-            "VALUES (@Id, @Name, @TypeId, @Description, @Seller, @Price, @Created, @Modified)";
+            "INSERT INTO products (Id, Name, TypeId, Description, Seller, Price, Created, Modified, Condition)" +
+            "VALUES (@Id, @Name, @TypeId, @Description, @Seller, @Price, @Created, @Modified, @Condition)";
         await connector.ExecuteAsync(command, new
         {
             Id = id,
@@ -30,7 +30,8 @@ public class ProductController : ControllerBase
             product.Seller,
             product.Price,
             Created = DateTime.UtcNow,
-            Modified = DateTime.UtcNow
+            Modified = DateTime.UtcNow,
+            product.Condition
         }, Connector.ConnStr);
         return Ok();
     }
