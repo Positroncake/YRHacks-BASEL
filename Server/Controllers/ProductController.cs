@@ -12,15 +12,9 @@ public class ProductController : ControllerBase
 {
     [HttpPost]
     [Route("addProduct")]
-    public async Task<ActionResult> AddProduct([FromBody] NewProductRequest req)
+    public async Task<ActionResult> AddProduct([FromBody] Product product)
     {
-        if (string.IsNullOrEmpty(req.Token)) return BadRequest();
-        (bool exists, string username) = await Utils.GetUnameFromToken(req.Token);
-        if (!exists) return Unauthorized();
-        
-        Product product = req.Prod;
-
-        var idArr = new byte[8];
+        byte[] idArr = new byte[8];
         RandomNumberGenerator.Fill(idArr);
         var id = BitConverter.ToUInt64(idArr, 0);
 
@@ -34,7 +28,7 @@ public class ProductController : ControllerBase
             product.Name,
             product.TypeId,
             product.Description,
-            Seller = username,
+            Seller = "temporary",
             product.Price,
             Created = DateTime.UtcNow,
             Modified = DateTime.UtcNow,
