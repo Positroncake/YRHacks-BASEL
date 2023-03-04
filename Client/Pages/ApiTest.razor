@@ -61,6 +61,16 @@
 <input @bind="_listName"/>
 <button @onclick="CreateNewList">Create list</button>
 
+<br/>
+<input @bind="_productId"/>
+<input @bind="_listId"/>
+<button @onclick="AppendToList">Append to list</button>
+
+<br/>
+<input @bind="_productId"/>
+<input @bind="_listId"/>
+<button @onclick="RemoveFromList">Remove from list</button>
+
 
 @code {
 
@@ -80,6 +90,8 @@
     private string _loginPassword = string.Empty;
 
     private string _listName = string.Empty;
+    private string _listId = string.Empty;
+    private string _productId = string.Empty;
 
     private async void SendToServer()
     {
@@ -148,6 +160,30 @@
             IsPublic = true
         };
         HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/buildList/newList", nL);
+        Console.WriteLine(response.IsSuccessStatusCode ? "200" : "ERR");
+    }
+
+    private async void AppendToList()
+    {
+        var mod = new BuildListModificationRequest
+        {
+            Token = await Lss.ContainKeyAsync("token") ? await Lss.GetItemAsStringAsync("token") : "",
+            ListId = ulong.Parse(_listId),
+            ProductId = ulong.Parse(_productId)
+        };
+        HttpResponseMessage response = await HttpClient.PutAsJsonAsync("api/buildList/append", mod);
+        Console.WriteLine(response.IsSuccessStatusCode ? "200" : "ERR");
+    }
+    
+    private async void RemoveFromList()
+    {
+        var mod = new BuildListModificationRequest
+        {
+            Token = await Lss.ContainKeyAsync("token") ? await Lss.GetItemAsStringAsync("token") : "",
+            ListId = ulong.Parse(_listId),
+            ProductId = ulong.Parse(_productId)
+        };
+        HttpResponseMessage response = await HttpClient.PutAsJsonAsync("api/buildList/remove", mod);
         Console.WriteLine(response.IsSuccessStatusCode ? "200" : "ERR");
     }
 
