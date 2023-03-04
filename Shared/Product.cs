@@ -6,16 +6,16 @@ namespace Yrhacks2023.Shared;
 public class Product
 {
     public string Name { get; set; } = string.Empty;
-    public int Type { get; set; }
+    public int TypeId { get; set; }
     public string Description { get; set; } = string.Empty;
     public string Image { get; set; } = string.Empty;
     public string Seller { get; set; } = string.Empty;
     
     [NotMapped]
     [JsonIgnore]
-    public ItemType ItemType
+    public ItemType Type
     {
-        get => (ItemType) Type;
-        set => Type = (int) value;
+        get => (ItemType) TypeId;
+        set => TypeId = (int) value;
     }
 }
