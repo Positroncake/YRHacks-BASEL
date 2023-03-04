@@ -1,18 +1,43 @@
-.page-content > section {
+.page-content{
+    position: fixed;
+    height: 90vh;
     width: 100%;
-    text-align: center;
-    background-color: var(--dark-gray);
-}
-.page-content > section:nth-child(even) {
-    background-color: var(--dark-gray-2);
 }
 
-.big-header {
-    color: var(--bright-green);
-    font-size: 3rem;
-    font-family: Syne, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 700;
+#myVideo {
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
 }
-.desc {
+
+.video-background__content {
     color: white;
+    font-size: 2em;
+    /* Positioned at the top left corner */
+    left: 0px;
+    position: absolute;
+    top: 0px;
+
+    /* Take full size */
+    height: 100%;
+    width: 100%;
+
+    /* Center the content */
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.to-build-button{
+    cursor: pointer;
+    margin-top: 1em;
+    font-size:  0.5em;
+    font-family: Syne, sans-serif;
+    background-color:rgb(42, 233, 96);
+    border: none;
+    border-radius: 20px;
+    width: 10%;
+    padding: 1em;
 }

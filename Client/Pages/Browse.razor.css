@@ -110,7 +110,7 @@
 }
 
 .item-price{
-    font-weight: bolder;
+    font-weight: 500;
     font-size: 1.75em;
     color: var(--light-teal);
 }
@@ -120,7 +120,7 @@
 }
 
 .item-condition{
-    font-weight: bold;
+    font-weight: 400;
 }
 
 .new{
