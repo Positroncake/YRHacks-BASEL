@@ -1,10 +1,13 @@
 @page "/ApiTest"
 @using Microsoft.AspNetCore.Components
 @using Yrhacks2023.Shared
+@using Yrhacks2023.Shared.Data
 @using System.Security.Cryptography
 @using System.Text
-@using Yrhacks2023.Shared.Data
+@using Blazored.LocalStorage
+@using Yrhacks2023.Shared.Requests
 @inject HttpClient HttpClient
+@inject ILocalStorageService Lss
 
 <br/>
 <span>Select product category:</span>
@@ -49,6 +52,16 @@
 <input @bind="_email"/>
 <button @onclick="Register">Register</button>
 
+<br/>
+<input @bind="_loginUsername"/>
+<input @bind="_loginPassword"/>
+<button @onclick="Login">Login</button>
+
+<br/><br/><br/><br/>
+<input @bind="_listName"/>
+<button @onclick="CreateNewList">Create list</button>
+
+
 @code {
 
     private string _name = string.Empty;
@@ -62,6 +75,11 @@
     private string _password = string.Empty;
     private string _displayName = string.Empty;
     private string _email = string.Empty;
+
+    private string _loginUsername = string.Empty;
+    private string _loginPassword = string.Empty;
+
+    private string _listName = string.Empty;
 
     private async void SendToServer()
     {
@@ -107,7 +125,30 @@
             Email = _email
         };
         HttpResponseMessage response = await HttpClient.PostAsJsonAsync("AccountApi/Register", account);
-        Console.WriteLine(response.Content.ReadAsStringAsync());
+        await Lss.SetItemAsStringAsync("token", await response.Content.ReadAsStringAsync());
+    }
+
+    private async void Login()
+    {
+        var lR = new LoginRequest
+        {
+            Username = _loginUsername,
+            Password = SHA512.HashData(Encoding.UTF32.GetBytes(_loginPassword))
+        };
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("AccountApi/Login", lR);
+        await Lss.SetItemAsStringAsync("token", await response.Content.ReadAsStringAsync());
+    }
+
+    private async void CreateNewList()
+    {
+        var nL = new NewBuildListRequest
+        {
+            Name = _listName,
+            Token = await Lss.ContainKeyAsync("token") ? await Lss.GetItemAsStringAsync("token") : "",
+            IsPublic = true
+        };
+        HttpResponseMessage response = await HttpClient.PostAsJsonAsync("api/buildList/newList", nL);
+        Console.WriteLine(response.IsSuccessStatusCode ? "200" : "ERR");
     }
 
 }

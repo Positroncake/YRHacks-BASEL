@@ -1,8 +1,8 @@
 namespace Yrhacks2023.Shared.Requests;
 
-public class AppendBuildListRequest
+public class BuildListModificationRequest
 {
-    public ulong Account { set; get; }
+    public string Token { set; get; } = string.Empty;
     public ulong ListId { set; get; }
     public ulong ProductId { set; get; }
 }

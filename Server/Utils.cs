@@ -7,8 +7,6 @@ namespace Yrhacks2023.Server;
 
 public static class Utils
 {
-    public const string ConnectionString = "Server=127.0.0.1;Port=3306;Database=SwTest;Uid=SwTestUser;Pwd=SwPassword";
-
     public static async Task<(bool, Account?)> Login(LoginRequest r)
     {
         // Check for empty input
@@ -21,7 +19,7 @@ public static class Utils
         List<Account> accounts = await access.QueryAsync<Account, dynamic>(sql, new
         {
             LoginUsername = r.Username
-        }, ConnectionString);
+        }, Connector.ConnStr);
         
         // Check if account exists
         Account selected;
@@ -47,7 +45,7 @@ public static class Utils
         {
             Token = token,
             Username = username
-        }, ConnectionString);
+        }, Connector.ConnStr);
         return token;
     }
 
@@ -59,7 +57,7 @@ public static class Utils
         List<TokenDbObject> results = await access.QueryAsync<TokenDbObject, dynamic>(sql, new
         {
             Token = token
-        }, ConnectionString);
+        }, Connector.ConnStr);
         
         // Check if token exists
         return results.Count == 1 ? (true, results.First().Username) : (false, string.Empty);

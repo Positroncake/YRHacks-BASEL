@@ -28,17 +28,12 @@ public class AccountController : ControllerBase
             numBytesRequested: 64);
 
         const string command =
-            "INSERT INTO accounts (Id, Username, PasswordHash, PasswordSalt, DisplayName, Email, Joined)" +
-            "VALUES (@Id, @Username, @PasswordHash, @PasswordSalt, @DisplayName, @Email, @Joined)";
-        
-        var idArr = new byte[8];
-        RandomNumberGenerator.Fill(idArr);
-        var id = BitConverter.ToUInt64(idArr, 0);
+            "INSERT INTO accounts (Username, PasswordHash, PasswordSalt, DisplayName, Email, Joined)" +
+            "VALUES (@Username, @PasswordHash, @PasswordSalt, @DisplayName, @Email, @Joined)";
 
         IConnector connector = new Connector();
         await connector.ExecuteAsync(command, new
         {
-            Id = id,
             r.Username,
             PasswordHash = hash,
             PasswordSalt = salt,
