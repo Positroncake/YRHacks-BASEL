@@ -1,4 +1,5 @@
 using System.Data;
+using System.Data.Common;
 using Dapper;
 using MySql.Data.MySqlClient;
 
@@ -21,5 +22,13 @@ public class Connector : IConnector
         using IDbConnection connection = new MySqlConnection(connectionString);
         // ReSharper disable once HeapView.PossibleBoxingAllocation
         return connection.ExecuteAsync(sql, parameters);
+    }
+
+    public DbDataReader GetBlob(string sql, string connectionString)
+    {
+        using var connection = new MySqlConnection(connectionString);
+        using var command = new MySqlCommand(sql, connection);
+
+        return command.ExecuteReader(CommandBehavior.SequentialAccess);
     }
 }
