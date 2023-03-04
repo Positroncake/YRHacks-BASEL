@@ -1,4 +1,9 @@
-﻿@page "/ProductPage"
+﻿@page "/ProductPage/{productId}"
+@using Blazored.LocalStorage
+@using Yrhacks2023.Shared.Data
+@inject HttpClient HttpClient
+@inject ILocalStorageService Lss
+
 <PageTitle>Shop/BASEL</PageTitle>
 <PageHeader/>
 
@@ -21,7 +26,21 @@
             <div class="small-gap"></div>
             <button class="list-button" onClick="">Add to List</button>
         </div>
-            
     </div>
-    
 </div>
+
+@code {
+    [Parameter]
+    public ulong productId { get; set; }
+
+    private string _name;
+    private string _seller;
+    private string _type;
+    private string _description;
+
+    protected override async Task OnInitializedAsync()
+    {
+        HttpResponseMessage msg = await HttpClient.GetAsync($"/api/buildList/getId/{productId}");
+    }
+
+}

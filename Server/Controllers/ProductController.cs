@@ -66,6 +66,19 @@ public class ProductController : ControllerBase
         }, Connector.ConnStr);
         return products.Count == 0 ? NotFound() : Ok(products);
     }
+    
+    [HttpGet]
+    [Route("getId/{i:int}")]
+    public async Task<ActionResult> GetById(ulong i)
+    {
+        IConnector connector = new Connector();
+        const string query = "SELECT Id,Name,TypeId,Description,Seller,Price FROM products WHERE Id = @Id LIMIT 1";
+        List<Product> products = await connector.QueryAsync<Product, dynamic>(query, new
+        {
+            Id = i
+        }, Connector.ConnStr);
+        return products.Count == 0 ? NotFound() : Ok(products[0]);
+    }
 
     [HttpPut]
     [Route("search")]
