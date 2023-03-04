@@ -1,3 +1,89 @@
 p {
     color: #0066cc;
 }
+
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    --bright-green: rgb(42, 233, 96);
+    --light-teal: rgb(32, 156, 126);
+    --med-teal: rgb(21, 101, 89);
+    --light-blue: rgb(41, 105, 137);
+    --dark-blue: rgb(33, 067, 110);
+    --purple-col: rgb(66, 69, 157);
+}
+
+body{
+    font-family: "Syne", sans-serif;
+}
+
+header{
+    width: 100%;
+    height: 4em;
+    background-color: rgb(31,31,31);
+    color: white;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: sticky;
+    top: 0;
+
+}
+
+
+nav {
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-block: 0;
+    height: 100%;
+}
+
+
+nav > a{
+    color: white;
+    cursor: pointer;
+    display: block;
+    transition: color 0.5s;
+    text-decoration: none;
+}
+
+
+
+nav > a:hover{
+    color: var(--light-teal);
+}
+
+.nav-logo{
+    display: block;
+    height: 4em;
+    width: auto;
+}
+
+
+.green{
+    color: var(--bright-green);
+}
+
+.search{
+    width: 20em;
+    height: 3em;
+    border-radius: 2px;
+    border: 0;
+    font-family: Syne;
+    padding: 1em;
+}
+
+
+[type="submit"]{
+    border: none;
+    border-radius: 2px;
+    background-color: var(--light-blue);
+    height: 3em;
+    color: white;
+    font-family: "Syne", sans-serif;
+    padding: 0.5em;
+}

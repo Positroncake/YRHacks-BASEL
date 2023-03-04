@@ -1,0 +1,115 @@
+@page "/Browse"
+<PageTitle>Browse/BASEL</PageTitle>
+<PageHeader/>
+
+<div class="page-content">
+
+    <div class="num-results">
+        <p>Showing 1-x of xx weird results for "query"</p>
+    </div>
+    <div class="sidebar">
+        <div class="sidebar-section">
+            <p class="sidebar-heading">Price</p>
+            <p class="sidebar-list-item">
+                <a href="#">Under $25</a>
+            </p>
+            <p class="sidebar-list-item">
+                <a href="#">$25 to $50</a>
+            </p>
+            <p class="sidebar-list-item">
+                <a href="#">$50 to $100</a>
+            </p>
+            <p class="sidebar-list-item">
+                <a href="#">$100 to $200</a>
+            </p>
+            <p class="sidebar-list-item">
+                <a href="#">$200 and above</a>
+            </p>
+            <form>
+                <!--Do this later-->
+            </form>
+        </div>
+        <div class="sidebar-section">
+            <p class="sidebar-heading">Type
+            </p>
+            <p class="sidebar-list-item">
+                <a href="#">CPU</a>
+            </p>
+            <p class="sidebar-list-item">
+                <a href="#">GPU</a>
+            </p>
+            <p class="sidebar-list-item">
+                <a href="#">BLAH BLAH</a>
+            </p>
+            <p class="sidebar-list-item">
+                <a href="#">???</a>
+            </p>
+            <p class="sidebar-list-item">
+                <a href="#">???</a>
+            </p>
+            <!--Add some more items as you see fit-->
+        </div>
+
+        <div class="sidebar-section">
+            <p class="sidebar-heading">Condition
+            </p>
+            <p class="sidebar-list-item">
+                <a href="#">New</a>
+            </p>
+            <p class="sidebar-list-item">
+                <a href="#">Used</a>
+            </p>
+            <p class="sidebar-list-item">
+                <a href="#">Not Specified</a>
+            </p>
+
+            <!--Add some more items as you see fit-->
+        </div>
+
+        <div class="sidebar-section">
+            <p class="sidebar-heading">Other heading
+            </p>
+            <p class="sidebar-list-item">
+                <a href="#">Whatever</a>
+            </p>
+            <!--Add some more items as you see fit-->
+        </div>
+
+
+    </div>
+    <div class="results-container">
+        <a href="#">
+            <!--To link to product page-->
+            <div class="product-card">
+                <img class="product-img" src="search-icon.png" alt="search icon">
+                <div prod-details>
+                    <p class="item-desc">Description of Item</p>
+                    <div class="card-mid">
+                        <p class="item-type">Item Type</p>
+                        <p> | </p>
+                        <p class="item-condition new">New</p>
+                    </div>
+                    <p class="item-price">$XX</p>
+                </div>
+            </div>
+        </a>
+
+        <div class="product-card">
+            <img class="product-img" src="computer-sample.jpeg">
+            <div prod-details>
+                <p class="item-desc">Random PC</p>
+                <div class="card-mid">
+                    <p class="item-type">PC</p>
+                    <p> | </p>
+                    <p class="item-condition used">Used</p>
+                </div>
+                <p class="item-price">$420.69</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@code {
+
+}

@@ -1,0 +1,118 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    --bright-green: rgb(42, 233, 96);
+    --light-teal: rgb(32, 156, 126);
+    --med-teal: rgb(21, 101, 89);
+    --light-blue: rgb(41, 105, 137);
+    --dark-blue: rgb(33, 067, 110);
+    --purple-col: rgb(66, 69, 157);
+    --light-grey: rgb(238, 238, 238)
+}
+
+/*Defines structure for the page*/
+.page-content{
+    width: 70%;
+    height: 90vh;
+    margin: 2em auto 2em auto;
+    display: grid;
+    gap: 1em;
+    grid-template-columns: 1fr 6fr;
+    grid-template-rows: 1fr 20fr;
+    grid-template-areas: 
+    "num-results num-results"
+    "sidebar results-container"
+    ". results-container";
+
+}
+
+.num-results{
+    grid-area: num-results;
+
+}
+
+
+
+.sidebar{
+    grid-area: sidebar;
+    background-color: var(--light-grey);
+    border-radius: 4px;
+}
+
+/*Styles the sidebar*/
+
+.sidebar-section{
+    width: 90%;
+    margin: 0 auto 0 1em;
+}
+
+.sidebar-list-item{
+    margin-left: 0.5em;
+}
+.sidebar-list-item > a{
+    color: var(--light-teal)
+}
+
+.sidebar-heading{
+    font-weight: 700;
+    margin: 1em 0 0.5em 0;
+}
+
+.results-container{
+    grid-area: results-container;
+    margin-left: 1em;
+    display: grid;
+    gap: 1em;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+}
+
+.results-container > a{
+    text-decoration: none;
+    color: inherit;
+}
+
+/*Styling the cards*/
+.product-card{
+    width: 100%;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 0.75em;
+}
+
+.product-img{
+    width: 100%
+}
+
+
+.item-desc{
+    font-weight:bolder;
+    font-size: 1.5em;
+}
+
+.item-type{
+    color: rgb(119, 119, 119);
+}
+
+.item-price{
+    font-weight: bolder;
+    font-size: 1.75em;
+    color: var(--light-teal);
+}
+
+.card-mid > p{
+    display: inline-block;
+}
+
+.item-condition{
+    font-weight: bold;
+}
+
+.new{
+    color: rgb(40, 160, 40);
+}
+
+.used{
+    color: var(--purple-col);
+}
